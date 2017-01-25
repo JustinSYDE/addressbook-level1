@@ -207,15 +207,38 @@ public class AddressBook {
      */
 
     public static void main(String[] args) {
-        showWelcomeMessage();
-        processProgramArgs(args);
-        loadDataFromStorage();
-        while (true) {
-            String userCommand = getUserInput();
-            echoUserCommand(userCommand);
-            String feedback = executeCommand(userCommand);
-            showResultToUser(feedback);
-        }
+    	String[] message = { DIVIDER, DIVIDER, VERSION, MESSAGE_WELCOME, DIVIDER };
+ 		for (String m : message) {
+ 		    System.out.println(LINE_PREFIX + m);
+ 		}
+		if (args.length >= 2) {
+			showToUser(MESSAGE_INVALID_PROGRAM_ARGS);
+			exitProgram();
+		}
+
+		if (args.length == 1) {
+			if (!isValidFilePath(args[0])) {
+				showToUser(String.format(MESSAGE_INVALID_FILE, args[0]));
+				exitProgram();
+			}
+
+			storageFilePath = args[0];
+			createFileIfMissing(args[0]);
+		}
+
+		if (args.length == 0) {
+			showToUser(MESSAGE_USING_DEFAULT_FILE);
+			storageFilePath = DEFAULT_STORAGE_FILEPATH;
+			createFileIfMissing(storageFilePath);
+		}
+		ALL_PERSONS.clear();
+		ALL_PERSONS.addAll(loadPersonsFromFile(storageFilePath));
+		while (true) {
+			String userCommand = getUserInput();
+			showToUser("[Command entered:" + userCommand + "]");
+			String feedback = executeCommand(userCommand);
+			showToUser(feedback, DIVIDER);
+		}
     }
 
     /*
