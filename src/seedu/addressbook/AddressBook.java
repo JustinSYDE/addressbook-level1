@@ -259,16 +259,16 @@ public class AddressBook {
     private static void processProgramArgs(String[] args) {
     	final int numArgs =  args.length;    	
     	switch (numArgs) {
-    		case 0: 
-    			setupDefaultFileForStorage();
-    			break;
-    		case 1:
-    			setupGivenFileForStorage(args[0]);
-    			break;
-    		default:
-    			showToUser(MESSAGE_INVALID_PROGRAM_ARGS);
-                exitProgram();
-                break;
+		case 0: 
+			setupDefaultFileForStorage();
+			break;
+		case 1:
+			setupGivenFileForStorage(args[0]);
+			break;
+		default:
+			showToUser(MESSAGE_INVALID_PROGRAM_ARGS);
+            exitProgram();
+            break;
     	}
     }
 
