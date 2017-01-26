@@ -1149,7 +1149,7 @@ public class AddressBook {
      * @return  string without the prefix
      */
     private static String removePrefix(String fullString, String prefix) {
-        return fullString.replace(prefix, "");
+        return fullString.replaceFirst(prefix, "");
     }
 
     /**
