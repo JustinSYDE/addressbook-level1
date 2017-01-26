@@ -256,9 +256,8 @@ public class AddressBook {
      *
      * @param args full program arguments passed to application main method
      */
-    private static void processProgramArgs(String[] args) {
-    	final int numArgs =  args.length;    	
-    	switch (numArgs) {
+    private static void processProgramArgs(String[] args) { 	
+    	switch (args.length) {
 		case 0: 
 			setupDefaultFileForStorage();
 			break;
