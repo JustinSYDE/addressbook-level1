@@ -137,13 +137,13 @@ public class AddressBook {
 
 
     /* We use a String array to store details of a single person.
-     * The constants given below are the indexes for the different data elements of a person
+     * The constants given below in PersonData are the indexes for the different data elements of a person
      * used by the internal String[] storage format.
      * For example, a person's name is stored as the 0th element in the array.
      */
-    private static final int PERSON_DATA_INDEX_NAME = 0;
-    private static final int PERSON_DATA_INDEX_PHONE = 1;
-    private static final int PERSON_DATA_INDEX_EMAIL = 2;
+    private static enum PersonData {
+        NAME, PHONE, EMAIL;
+    }
 
     /**
      * The number of data elements for a single person.
@@ -256,9 +256,9 @@ public class AddressBook {
      *
      * @param args full program arguments passed to application main method
      */
-    private static void processProgramArgs(String[] args) { 	
+    private static void processProgramArgs(String[] args) {
     	switch (args.length) {
-		case 0: 
+		case 0:
 			setupDefaultFileForStorage();
 			break;
 		case 1:
@@ -838,7 +838,7 @@ public class AddressBook {
      * @param person whose name you want
      */
     private static String getNameFromPerson(String[] person) {
-        return person[PERSON_DATA_INDEX_NAME];
+        return person[PersonData.valueOf("NAME").ordinal()];
     }
 
     /**
@@ -847,7 +847,7 @@ public class AddressBook {
      * @param person whose phone number you want
      */
     private static String getPhoneFromPerson(String[] person) {
-        return person[PERSON_DATA_INDEX_PHONE];
+        return person[PersonData.valueOf("PHONE").ordinal()];
     }
 
     /**
@@ -856,7 +856,7 @@ public class AddressBook {
      * @param person whose email you want
      */
     private static String getEmailFromPerson(String[] person) {
-        return person[PERSON_DATA_INDEX_EMAIL];
+        return person[PersonData.valueOf("EMAIL").ordinal()];
     }
 
     /**
@@ -869,9 +869,9 @@ public class AddressBook {
      */
     private static String[] makePersonFromData(String name, String phone, String email) {
         final String[] person = new String[PERSON_DATA_COUNT];
-        person[PERSON_DATA_INDEX_NAME] = name;
-        person[PERSON_DATA_INDEX_PHONE] = phone;
-        person[PERSON_DATA_INDEX_EMAIL] = email;
+        person[PersonData.valueOf("NAME").ordinal()] = name;
+        person[PersonData.valueOf("PHONE").ordinal()] = phone;
+        person[PersonData.valueOf("EMAIL").ordinal()] = email;
         return person;
     }
 
@@ -1028,9 +1028,9 @@ public class AddressBook {
      * @param person String array representing the person (used in internal data)
      */
     private static boolean isPersonDataValid(String[] person) {
-        return isPersonNameValid(person[PERSON_DATA_INDEX_NAME])
-                && isPersonPhoneValid(person[PERSON_DATA_INDEX_PHONE])
-                && isPersonEmailValid(person[PERSON_DATA_INDEX_EMAIL]);
+        return isPersonNameValid(person[PersonData.valueOf("NAME").ordinal()])
+                && isPersonPhoneValid(person[PersonData.valueOf("PHONE").ordinal()])
+                && isPersonEmailValid(person[PersonData.valueOf("EMAIL").ordinal()]);
     }
 
     /*
